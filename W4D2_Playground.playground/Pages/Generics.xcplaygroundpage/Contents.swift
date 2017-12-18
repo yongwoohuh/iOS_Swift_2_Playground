@@ -28,7 +28,7 @@ func printMyTwoNumbers<Element>(num1: Element, num2: Element){
 
 printMyTwoNumbers(num1: 1, num2: 1)
 printMyTwoNumbers(num1: 2.0, num2: 2.1)
-printMyTwoNumbers(num1: "three", num2: "four")\
+printMyTwoNumbers(num1: "three", num2: "four")
 
 
 //: You have also been using collections that use generic types. Both arrays and dictionaries use a generic type. You can define any variable type for those collections to store.

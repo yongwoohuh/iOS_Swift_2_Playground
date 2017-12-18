@@ -6,6 +6,7 @@
         <page name='More Tuples'/>
         <page name='Generics'/>
         <page name='Error Handling'/>
+        <page name='Operators'/>
         <page name='Stretch Goals'/>
     </pages>
 </playground>

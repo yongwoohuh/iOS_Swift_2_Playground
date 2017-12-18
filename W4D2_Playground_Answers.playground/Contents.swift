@@ -170,6 +170,82 @@ struct Queue<Element> {
 }
 
 
+//: Challenge #7
+enum InputError: Error {
+    case NoUsername
+    case NoPassword
+    case NoEmail
+}
+
+func checkParameters(username: String?, password: String?, email: String?) throws{
+    
+    guard let unwrapUsername = username else {
+        
+        throw InputError.NoUsername
+        return
+    }
+    
+    guard let unwrapPassword = password else {
+        
+        throw InputError.NoPassword
+        return
+    }
+    
+    guard let unwrapEmail = email else {
+        
+        throw InputError.NoEmail
+        return
+    }
+    
+    print("Username: \(unwrapUsername)")
+    print("Password: \(unwrapPassword)")
+    print("Email: \(unwrapEmail)")
+}
+
+do{
+    
+    try checkParameters(username: username, password: password, email: email)
+}
+catch let error {
+    
+    print("Input error: \(error)")
+}
+
+//: Challenge 8
+
+postfix operator %
+postfix func % (percentage: Int) -> Double {
+    
+    return Double(percentage)/100.0
+}
+
+var per = 45%
+
+
+//: Challenge 9
+
+func + (array1: [Int], array2: [Int]) -> [Int]?{
+    
+    var arr = [Int]()
+    if array1.count == array2.count {
+        
+        for i in 0..<array1.count {
+            
+            let array1Value = array1[i]
+            let array2Value = array2[i]
+            arr.append(array1Value + array2Value)
+        }
+    }
+    else{
+        
+        return nil
+    }
+    return arr
+}
+
+var ha = [1,2] + [3,4,6]
+print(ha)
+
 //: Stretch Goal #2
 
 extension Queue where Element : Numeric {
