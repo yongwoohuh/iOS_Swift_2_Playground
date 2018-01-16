@@ -1,32 +1,46 @@
-//: ### More Optionals
-//: Let's start off with some review of optionals.
-//: When we have an optional variable, the variable might contain a value or it can contain nil. Optionals are represented with a '?' in front of the variable type.
+/*:
+ ## More Optionals
+ Let's start off with some review of optionals.
+ When we have an optional variable, the variable might contain a value or it can contain nil. Optionals are represented with a '?' in front of the variable type.
+*/
 
-// Here we declare a Double variable that is optional
-var myOptionalValue: Double? = nil
-
-// We set our variable with a value of 1.0
-myOptionalValue = 1.0
-
-//: Whenever we have an optional value, we should almost always check if the optional has a value or not. We can use "conditional unwrapping" to accomplish this in a safe manner.
-
-// We do a 'conditional unwrapping' or a 'if-let' statement
-// This condition checks if the optional value has a value, and if it does, it will continue inside our block of code.
-if let myUnwrappedValue = myOptionalValue {
-    
-    print(myUnwrappedValue)
-}
-
-// We can also freely unwrap an optional value using '!', but this will crash your app if the optional value is found to be nil.
-// So you have to be very careful with this!
-print(myOptionalValue!)
+/*:
+ - Experiment:
+ Declare a optional Double value and set it to nil
+ */
 
 
-//: ### Challenge 1
-//: We want to write a function that validates form data filled in by a user. Once we encounter the first field that is blank, we want to indicate to the user that the field is blank.
-//: If the user has filled in everything correctly, we want to print out all information out.
-//: Below is some test data you can use to test your function.
+/*:
+ - Experiment:
+ Assign a value your optional Double
+ */
 
+
+/*:
+ - Experiment:
+ Force unwrap the optional value. Why do you have to careful about force unwrapping?
+ */
+
+
+/*:
+ - Experiment:
+ Use conditional unwrapping to verify if the optional has a value. Print the value if there is something, otherwise, print out to indicate there is no value present. Why is conditional unwrapping better than force unwrapping?
+ */
+
+
+/*:
+ - Callout(Challenge):
+ Create a function that removes the `nil` values from the array and returns a new array with only the valid Strings.
+ */
+var testData: [String?] = ["Heather", nil, "Mike", "John", nil, nil, "Bob"]
+
+
+/*:
+ - Callout(Challenge):
+ We want to write a function that validates form data filled in by a user. Once we encounter the first field that is blank, we want to indicate to the user that the field is blank.
+ If the user has filled in everything correctly, we want to print out all information out.
+ Below is some test data you can use to test your function.
+*/
 // Should pass all checks and print all information
 let username: String? = "user1"
 let password: String? = "password123"
@@ -44,12 +58,12 @@ let email: String? = "user1@lighthouselabs.ca"
 
 
 
-
-//: ### Guard Let
-//: Depending on how you finished the first challenge, the code you've written might not be as readable or optimal as it could be. So let's take a look at how we can improve this.
-//: A 'guard' statement is similar to an 'if', but a 'guard' statement will only run its block of code if the conditions are NOT met.
-//: Let's look at a simple guard example below.
-
+/*:
+## Guard Let
+Depending on how you finished the first challenge, the code you've written might not be as readable or optimal as it could be. So let's take a look at how we can improve this.
+A 'guard' statement is similar to an 'if', but a 'guard' statement will only run its block of code if the conditions are NOT met.
+Let's look at a simple guard example below.
+*/
 let myNumber = 10
 
 // This function checks if the number given to it is a positive or negative value
@@ -68,8 +82,21 @@ func isMyNumberANegativeValue(myNumber: Int){
 
 isMyNumberANegativeValue(myNumber: myNumber)
 
+/*:
+ - Experiment:
+ Try creating your own guard statement with different conditional statements. Notice which boolean condition causes the code the enter the 'else' block or bypass it entirely.
+ */
 
-//: Let's take a look at another example and see how we can use guard for optionals
+
+/*:
+ - Experiment:
+ Create a function that takes in two number parameters and divide them. We don't like dividing by zero, so ensure this doesn't happen. Otherwise, return the calculated value.
+ */
+
+
+/*:
+ Let's take a look at another example and see how we can use guard for optionals
+ */
 
 let myOptionalNumber: Int? = 10
 
@@ -93,9 +120,16 @@ func isMyNumberAnOptional(myOptionalNumber: Int?){
 
 isMyNumberAnOptional(myOptionalNumber: myOptionalNumber)
 
+/*:
+ - Experiment:
+ Create a function that takes in an array of numbers. Have the function add all the numbers together and return the result. Ensure there exists at least one value in the array using the `first` method of the array.
+ */
 
-//: ### Challenge 2
-//: Now that we've learnt this new guard statement, let's rewrite challenge 1 using the guard statements. How does it improve our current implementation?
+
+/*:
+ - Callout(Challenge):
+  Now that we've learnt this new guard statement, let's rewrite the form validation challenge using the guard statements. How does it improve our current implementation?
+ */
 
 
 //: [Next](@next)
