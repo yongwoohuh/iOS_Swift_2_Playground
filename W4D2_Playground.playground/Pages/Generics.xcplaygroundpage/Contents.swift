@@ -9,21 +9,21 @@
  */
 
 func printMyTwoNumbersInt(num1: Int, num2: Int){
-    
-    print("My numbers are \(num1) and \(num2)")
+  
+  print("My numbers are \(num1) and \(num2)")
 }
 
 func printMyTwoNumbersDouble(num1: Double, num2: Double){
-    
-    print("My numbers are \(num1) and \(num2)")
+  
+  print("My numbers are \(num1) and \(num2)")
 }
 
 /*:
  Instead, we can write a function that takes a generic type so we can print any two values
  */
 func printMyTwoNumbers<Element>(num1: Element, num2: Element){
-    
-    print("My numbers are \(num1) and \(num2)")
+  
+  print("My numbers are \(num1) and \(num2)")
 }
 
 printMyTwoNumbers(num1: 1, num2: 1)
@@ -32,7 +32,7 @@ printMyTwoNumbers(num1: "three", num2: "four")
 
 /*:
  - Experiment:
- Now you try! Write a generic function that takes in two parameters and multiply their value together and print the result. ( Hint: You might run into an error after finishing. Continue to the next experiment to find out why!)
+ Now you try! Write a generic function that takes in two parameters and multiply their value together and print the result. (Hint: You might run into an error after finishing. Continue to the next experiment to find out why!)
  */
 
 
@@ -42,7 +42,7 @@ printMyTwoNumbers(num1: "three", num2: "four")
  */
 
 func multiply<Element: Numeric>(num1: Element, num2: Element) {
-    
+  
 }
 
 
@@ -54,11 +54,11 @@ func multiply<Element: Numeric>(num1: Element, num2: Element) {
 
 /*:
  - Experiment:
- Write a generic function that takes in two parameters. One parameter is an array of elements, and the other is one element you are trying to find in the list. Return the index where the element exists in the array. ie: Given [1,5,2,4] and '5', the returned index is 1
+ Write a generic function that takes in two parameters. One parameter is an array of elements, and the other is one element you are trying to find in the array. Return the index where the element exists in the array. ie: Given `[1,5,2,4]` and `'5'`, the returned index is `1`
  */
 /*:
  - Note:
- For this experiment, refrain from using the array method `indexOf`. And also the protocol `Equatable` might be useful here. Search it up to see what it's about.
+ For this experiment, refrain from using the array method `indexOf`. Also the protocol `Equatable` might be useful here. Search it up to see what it's about.
  */
 
 
