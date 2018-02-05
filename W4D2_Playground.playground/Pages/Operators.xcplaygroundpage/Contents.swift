@@ -34,8 +34,8 @@ let unwrapped: Double = optionalValue!
 
 // Here we define our '+' operator function with a String and Int parameter
 func + (left: String, right: Int) -> String {
-    
-    return "\(left)\(String(right))"
+  
+  return "\(left)\(String(right))"
 }
 
 // This is our result
@@ -56,12 +56,12 @@ let combinedValues = "abc" + 123
  Changing the behaviour of existing operators is discouraged in real projects as it can cause confusion.
  */
 extension Int {
-    
-    // Comment this function in to try it!
-    //    static func + (left: Int, right: Int) -> Int{
-    //
-    //        return left - right
-    //    }
+  
+  // Comment this function in to try it!
+  //    static func + (left: Int, right: Int) -> Int{
+  //
+  //        return left - right
+  //    }
 }
 
 
@@ -73,8 +73,8 @@ extension Int {
 // Because the '+++' operator doesn't exist, new operators are declared at a global level using the `operator` keyword and marked with `prefix`, `infix`, `postfix`.
 postfix operator +++
 postfix func +++ (number: Int) -> Int {
-    
-    return number * 2
+  
+  return number * 2
 }
 
 // Now we can freely use our new custom operator
@@ -97,7 +97,7 @@ var incrementTwo = incrementOne+++
 
 /*:
  - Callout(Challenge):
- When we have percentage values, we tend to convert them into their decimal form before doing any arithmetic to them. Create an operator with the '%' that will be a convenient operator to convert Int values a usable percentage value. ie: 10% = 0.1
+ When we have percentage values, we tend to convert them into their decimal form before doing any arithmetic to them. Create an operator with the '%' that will be a convenient operator to convert Int values into a usable percentage value. ie: 10% = 0.1
  */
 
 
@@ -111,4 +111,3 @@ var incrementTwo = incrementOne+++
 
 
 //: [Next](@next)
-
