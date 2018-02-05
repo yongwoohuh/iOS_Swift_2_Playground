@@ -32,10 +32,14 @@ printMyTwoNumbers(num1: "three", num2: "four")
 
 /*:
  - Experiment:
- Now you try! Write a generic function that takes in two parameters and multiply their value together and print the result. ( Hint: You might run into an error after finishing. Continue to the next experiment to find out why!)
+ Now you try! Write a generic function that takes in two parameters and multiply their value together and print the result. (Hint: You might run into an error after finishing. Continue to the next experiment to find out why!)
  */
-
-
+func multiplyExplicitTypes<Element: Numeric>(num1: Element, num2: Element) -> Element {
+    return num1 * num2
+}
+multiplyExplicitTypes(num1: 3, num2: 7)
+multiplyExplicitTypes(num1: 20, num2: 9)
+multiplyExplicitTypes(num1: 4, num2: 18)
 /*:
  - Experiment:
  You might have run into error in the console regarding the multiplication operator can only be applied to numbered parameters. This makes sense as multiplying two Strings together doesn't make sense. So, we want to only take in variable types that *can* use the multiplication operator. In this case, we can limit the element type to types that conform to the `Numeric` protocol like below.
@@ -54,13 +58,24 @@ func multiply<Element: Numeric>(num1: Element, num2: Element) {
 
 /*:
  - Experiment:
- Write a generic function that takes in two parameters. One parameter is an array of elements, and the other is one element you are trying to find in the list. Return the index where the element exists in the array. ie: Given [1,5,2,4] and '5', the returned index is 1
+ Write a generic function that takes in two parameters. One parameter is an array of elements, and the other is one element you are trying to find in the array. Return the index where the element exists in the array. ie: Given `[1,5,2,4]` and `'5'`, the returned index is `1`
  */
 /*:
  - Note:
- For this experiment, refrain from using the array method `indexOf`. And also the protocol `Equatable` might be useful here. Search it up to see what it's about.
+ For this experiment, refrain from using the array method `indexOf`. Also the protocol `Equatable` might be useful here. Search it up to see what it's about.
  */
-
+var array = [1,2,3,4,5,6]
+var i = 0
+func returningTheIndex<Element: Equatable>(arrayOfElements: [Element], elementInArray: Element) -> Int? {
+    for (index, element) in arrayOfElements.enumerated() {
+        if element == elementInArray {
+            return index
+        }
+    }
+    
+    return nil
+}
+returningTheIndex(arrayOfElements: array, elementInArray: 5)
 
 
 /*:

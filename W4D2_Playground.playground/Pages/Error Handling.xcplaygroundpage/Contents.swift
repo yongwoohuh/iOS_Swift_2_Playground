@@ -57,55 +57,119 @@ catch let error {
  */
 
 
+class Human {
+    var name: String
+    var age: Double
+    init(name: String, age: Double)throws {
+        self.name = name
+        self.age = age
+        if (self.name == "") {
+            throw  HumanErrors.NameIsEmpty
+        }
+        if (self.age < 0) {
+            throw  HumanErrors.AgeisntValid
+        }
+    }
+}
+
 /*:
  - Experiment:
- Create your own errors that throw when the name provided is empty and if the age is invalid. (Hint: Even initializers can throw errors)
+    Create your own errors that throw when the name provided is empty or if the age is invalid. Go back and update the Human's initializer to throw an error when the data passed in is invalid.
  */
-
-
+enum HumanErrors: Error {
+    case NameIsEmpty
+    case AgeisntValid
+}
 /*:
  - Experiment:
  Now you can test your new Human class and surround it around the do-catch blocks.
  */
-
+do{
+  let human = try Human(name: "April", age: 26)
+}
+    // And here is where we 'catch' the error
+catch let error {
+    
+    // Once 'caught', we can print out the error for more information and prevents our app from crashing
+    print("An error is thrown: \(error)")
+}
 
 /*:
  - Experiment:
- Test your Human class again but don't surround it with a do-catch block and use `try?` instead. What do you notice?
+ Test your Human class again but don't surround it with a do-catch block and use `try?` instead. What do you notice? (What is the value of the new human when an error is thrown?)
  */
-
+let sam = try? Human(name: "tiffany", age: 49)
 
 /*:
  - Experiment:
- Given the following JSON string, try to parse the string using 'JSONSerialization' - `class func jsonObject(with data: Data,
- options opt: JSONSerialization.ReadingOptions = []) throws -> Any`. Then print out each key-value.
+ Given the following JSON data, try to parse the JSON using `JSONSerialization`, then print out each key-value.
+ 
+    `class func jsonObject(with data: Data, options opt: JSONSerialization.ReadingOptions = []) throws -> Any`
  */
-let str = "{\"firstName\": \"Bob\", \"lastName\": \"Doe\", \"vehicles\": [\"car\", \"motorcycle\", \"train\"]}"
+let data = "{\"firstName\": \"Bob\", \"lastName\": \"Doe\", \"vehicles\": [\"car\", \"motorcycle\", \"train\"]}".data(using: .utf8)!
 
+var json: [String: Any]!
+do {
+    json = try JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+} catch let error {
+    print("Error parsing json: \(error.localizedDescription)")
+}
+
+for (key, value) in json {
+    print("\(key): \(value)")
+}
 
 /*:
  - Callout(Challenge):
  Going back to our challenge from "More Optionals", let's rewrite the form valiation but we will use throw errors to indicate which piece is missing. We want to write a function that validates form data filled in by a user. Once we encounter the first field that is blank, we want to throw an error indicating which field is empty. Otherwise, print out all the information.
  */
 // Should pass all checks and print all information
-let username: String? = "user1"
-let password: String? = "password123"
-let email: String? = "user1@lighthouselabs.ca"
+//let username: String? = "user1"
+//let password: String? = "password123"
+//let email: String? = "user1@lighthouselabs.ca"
 
 // Should stop at password check and throw an error regarding empty password
-//let username: String? = "user1"
-//let password: String? = nil
-//let email: String? = "user1@lighthouselabs.ca"
+let username: String? = "user1"
+let password: String? = nil
+let email: String? = "user1@lighthouselabs.ca"
 
 // Should stop at username check and throw an error regarding empty user name
 //let username: String? = nil
 //let password: String? = nil
 //let email: String? = "user1@lighthouselabs.ca"
 
+enum UserLeftBlank: Error {
+    case UserNameIsEmpty
+    case PasswordIsEmpty
+    case EmailIsEmpty
+}
 
+func validateIfEmpty() throws {
+    if let username = username {
+        print(username)
+    } else {
+        throw UserLeftBlank.UserNameIsEmpty
+    }
+    if let password = password {
+        print(password)
+    } else {
+        throw UserLeftBlank.PasswordIsEmpty
+    }
+    if let email = email {
+        print(email)
+    } else {
+        throw UserLeftBlank.EmailIsEmpty
+    }
+}
+
+try? validateIfEmpty()
 /*:
  - Callout(Challenge):
- Given the following HondaDealership class, finish it off by implementing a function and testing it. Write a function that sells off a chosen car for the price. Throw an error if the model doesn't exists, insufficient amount of money was given, or the car is out of stock.
+ Given the following HondaDealership class, finish it off by implementing a function and testing it. Write a function that sells off a chosen car for the price.
+ 
+     `func sellCar(model: String, offeredPrice: Int) throws`
+ 
+    Throw an error if the model doesn't exist, insufficient amount of money was given, or the car is out of stock.
  */
 class HondaDealership{
     
@@ -114,7 +178,34 @@ class HondaDealership{
                               "Prelude" : (price: 9000, count: 2)]
     
     
+    enum CarStuff: Error {
+        case ModelDoesntExist
+        case DontHaveEnoughMoney
+        case CarOutOfStock
+    }
+    func sellCar(model: String, offeredPrice: Int) throws {
+        if(model != "Civic") || (model != "CRV") || (model != "Prelude") {
+            throw CarStuff.ModelDoesntExist
+        }
+        if ((model == "Civic") && (availableCarSupply["Civic"]!.price < 5000)) || ((model == "CRV") && (availableCarSupply["CRV"]!.price < 7000)) || ((model == "Prelude") && (availableCarSupply["Prelude"]!.price < 9000)) {
+            throw CarStuff.DontHaveEnoughMoney
+        }
+        if ((model == "Civic") && (availableCarSupply["Civic"]!.count == 0)) || ((model == "CRV") && (availableCarSupply["CRV"]!.count == 0))  || ((model == "Prelude") && (availableCarSupply["Prelude"]!.count == 0)) {
+            throw CarStuff.CarOutOfStock
+        }
+    }
+    
 }
 
+let newDealership = HondaDealership()
+do{
+    let purchase = try newDealership.sellCar(model: "BMW", offeredPrice: 2600)
+}
+    // And here is where we 'catch' the error
+catch let error {
+    
+    // Once 'caught', we can print out the error for more information and prevents our app from crashing
+    print("An error is thrown: \(error)")
+}
 //: [Next](@next)
 

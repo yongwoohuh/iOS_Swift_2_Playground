@@ -1,44 +1,56 @@
 /*:
  ## More Optionals
  Let's start off with some review of optionals.
- When we have an optional variable, the variable might contain a value or it can contain nil. Optionals are represented with a '?' in front of the variable type.
+ When we have an optional variable, the variable might contain a value or it can contain nil. Optionals are represented with a '?' after the variable type.
 */
-
 /*:
  - Experiment:
  Declare a optional Double value and set it to nil
  */
-
+var optionalDouble:Double? = nil
 
 /*:
  - Experiment:
  Assign a value your optional Double
  */
-
+ optionalDouble = 74.56
 
 /*:
  - Experiment:
- Force unwrap the optional value. Why do you have to careful about force unwrapping?
+ Force unwrap the optional value. Why do you have to be careful about force unwrapping?
  */
-
+optionalDouble!
 
 /*:
  - Experiment:
  Use conditional unwrapping to verify if the optional has a value. Print the value if there is something, otherwise, print out to indicate there is no value present. Why is conditional unwrapping better than force unwrapping?
  */
-
+if let double = optionalDouble{
+    print(double)
+}
+else {
+    print("no value jabronie")
+}
 
 /*:
  - Callout(Challenge):
  Create a function that removes the `nil` values from the array and returns a new array with only the valid Strings.
  */
 var testData: [String?] = ["Heather", nil, "Mike", "John", nil, nil, "Bob"]
-
+func removesNil() -> [String] {
+    var validData = [String]()
+    for data in testData {
+        if let data = data {
+            validData.append(data)
+        }
+    }
+    return validData
+}
 
 /*:
  - Callout(Challenge):
  We want to write a function that validates form data filled in by a user. Once we encounter the first field that is blank, we want to indicate to the user that the field is blank.
- If the user has filled in everything correctly, we want to print out all information out.
+ If the user has filled in everything correctly, we want to print all information out.
  Below is some test data you can use to test your function.
 */
 // Should pass all checks and print all information
@@ -56,7 +68,23 @@ let email: String? = "user1@lighthouselabs.ca"
 //let password: String? = nil
 //let email: String? = "user1@lighthouselabs.ca"
 
-
+func validate() {
+    if let username = username {
+        print(username)
+    } else {
+        print("You suck username")
+    }
+    if let password = password {
+        print(password)
+    } else {
+        print("You suck password")
+    }
+    if let email = email {
+        print(email)
+    } else {
+        print("You suck email")
+    }
+}
 
 /*:
 ## Guard Let
@@ -86,14 +114,28 @@ isMyNumberANegativeValue(myNumber: myNumber)
  - Experiment:
  Try creating your own guard statement with different conditional statements. Notice which boolean condition causes the code the enter the 'else' block or bypass it entirely.
  */
+ var aprilIsCool = "correct"
 
-
+func onlyIfAprilIsntCool(aprilIsCool: String) {
+    guard aprilIsCool == "incorrect" else {
+        print("She is definitely cool")
+        return
+    }
+    print("She isn't cool")
+}
+onlyIfAprilIsntCool(aprilIsCool: aprilIsCool)
 /*:
  - Experiment:
  Create a function that takes in two number parameters and divide them. We don't like dividing by zero, so ensure this doesn't happen. Otherwise, return the calculated value.
  */
+func divide(number1 num1:Double, byNumber2 num2:Double) -> Double? {
+    guard num2 != 0.0 else {
+        return nil
+    }
+    return num1/num2
+}
 
-
+divide(number1: 1.0, byNumber2: 0.2)
 /*:
  Let's take a look at another example and see how we can use guard for optionals
  */
@@ -105,7 +147,7 @@ func isMyNumberAnOptional(myOptionalNumber: Int?){
     
     // This guard checks if 'myOptionalNumber' has a value or not. Similar concept to conditional unwrapping
     // If 'myOptionalNumber' is indeed nil, the else block will run
-    // Otherwise, our guard if let statement is looking for a valid value, and the code will continue to run
+    // Otherwise, our guard let statement is looking for a valid value, and the code will continue to run
     guard let myUnwrapped = myOptionalNumber else {
         
         print("This value is nil")
@@ -122,14 +164,57 @@ isMyNumberAnOptional(myOptionalNumber: myOptionalNumber)
 
 /*:
  - Experiment:
- Create a function that takes in an array of numbers. Have the function add all the numbers together and return the result. Ensure there exists at least one value in the array using the `first` method of the array.
+ Create a function that takes in an array of numbers. Have the function add all the numbers together and return the result. Make sure to `guard` against an empty array. Use `array.first` to check if there is at least one value in the array.
  */
+var numberedArray: [Double] = [1,2,3,4,5,6]
+func addAllNumbers(numberArray: [Double]) -> Double {
+    
+    guard numberArray.first != nil else {
+        return 0
+    }
+    
+    var sum = 0.0
+    for number in numberArray {
+        sum += number
+    }
 
+    return sum
+}
+addAllNumbers(numberArray: numberedArray)
 
 /*:
  - Callout(Challenge):
   Now that we've learnt this new guard statement, let's rewrite the form validation challenge using the guard statements. How does it improve our current implementation?
  */
+// Should pass all checks and print all information
+let user: String? = "user1"
+let pass: String? = "password123"
+let gmail: String? = "user1@lighthouselabs.ca"
+
+// Should stop at password check and indicate password field is empty
+//let username: String? = "user1"
+//let password: String? = nil
+//let email: String? = "user1@lighthouselabs.ca"
+
+// Should stop at username check and indicate username field is empty
+//let username: String? = nil
+//let password: String? = nil
+//let email: String? = "user1@lighthouselabs.ca"
 
 
+func validateUsingGuard() {
+    guard let user = user else {
+     print("You suck username")
+        return
+    }
+   
+    guard let pass = pass else {
+      print("You suck password")
+        return
+    }
+    guard let gmail = gmail else {
+        print("gmails sucks")
+        return
+    }
+}
 //: [Next](@next)

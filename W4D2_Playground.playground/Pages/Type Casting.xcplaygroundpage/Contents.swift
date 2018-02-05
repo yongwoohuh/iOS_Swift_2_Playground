@@ -4,7 +4,8 @@ import UIKit
 
 /*:
  ## Type Casting
- Type casting is a way to check the type of an instance or treat that instance as a different superclass or subclass from somewhere in its own class hierachy. There are a few operators in Swift we can use to handle type casting.
+ Type casting is a way to check the type of a varible. We can also down cast a variable to a different subclass of its type. For example, we could downcast a `UIView` as a `UIButton` since the button is a subclass of `UIView`.
+ There are a few operators in Swift we can use to handle type casting.
  */
 /*:
  - Callout(Operator: 'is'):
@@ -27,13 +28,16 @@ let myView: UIView = UIButton()
 
 /*:
  - Experiment:
- Try using the `is` operator on `myView`. Take a look on the right side to see what the results are. ie: myView is UIView
+ Try using the `is` operator on `myView`. Take a look at the evaluation on the right to see what the results are. ie: `myView is UIView`. Try checking if `myView` is any of the following views: `UIButton`, `UITableView`, `UIImageView`
  */
-
+myView is UIView
+myView is UIButton
+myView is UITableView
+myView is UIImageView
 
 /*:
  - Experiment:
- Because 'myView' is a UIView, we can't call UIButton specific functions such as 'setTitle'
+ Because 'myView' is a UIView, we can't call UIButton specific methods such as 'setTitle'
  */
 
 //myView.setTitle("Test", for: .normal) // The compiler will complain about this code!
@@ -43,28 +47,53 @@ let myView: UIView = UIButton()
  - Experiment:
  Here we downcast our `myView` variable to an actual UIButton using `as?`. Try changing the type of class you downcast to and check what the behaviour is. For example, what happens when you try to downcast `myView` to a `UITableView`? What happens if you use `as!`?
  */
-let myCastedButtonView: UIButton? = myView as? UIButton
+// TODO REMOVE THE BUTTON OPTIONAL TYPE
+let myCastedButtonView = myView as? UIImageView
 
 
 /*:
  - Experiment:
  Now that we downcast our `myView` to an actual UIButton, use conditional unwrapping to ensure it is not nil, then try calling the `setTitle` method to ensure it can be called.
  */
+if let myCastedButtonView = myView as? UIButton {
+    myCastedButtonView.setTitle("Hi", for: .normal)
+}
 
 
 /*:
  - Callout(Challenge):
- Imagine we had a UIView containing many subviews and we needed to find all the views of a specific type. Write a function to search for UIButtons and returns an array of type UIButton containing all the found UIButtons. You can use the below as your test data
+ Every `UIView` has a property called `subviews` that is an array of all of it's subviews. `view.subviews`. Imagine we had a UIView containing many different types of subviews.
  */
-let subViews: [UIView] = [UIButton(), UIButton(), UILabel(), UITextField(), UILabel(), UIButton()]
 
+let view = UIView()
+view.addSubview(UIButton())
+view.addSubview(UIButton())
+view.addSubview(UILabel())
+view.addSubview(UITextField())
+view.addSubview(UILabel())
+view.addSubview(UIButton())
+/*:
+  And we need to find all buttons. Write a function to search for `UIButtons` in this view's `subviews`, and return an array will all the buttons.
+ */
+
+func findAllButtons() -> [UIButton] {
+    var buttonArray = [UIButton]()
+    for subview in view.subviews {
+        if let button = subview as? UIButton {
+            buttonArray.append(button)
+        } else {
+            print("you suck")
+        }
+    }
+    return buttonArray
+}
 
 /*:
  - Callout(Challenge - Part 1):
- Finish the implementation of the `Movie` class and `Song` class. The `Movie` class will have a new property to store the director's name. The `Song` class will have a new property to store the artist's name. Ensure you add their respective initializer methods as well to setup their properties.
+ Finish the implementation of the `Movie` class and `Song` class. The `Movie` class will have a new property called `director` to store the director's name. The `Song` class will have a new property called `artist` to store the artist's name. Ensure you add their respective initializer methods as well to setup their properties.
  */
 
-class MediaItem{
+class MediaItem {
     var name: String
     init(name: String){
         self.name = name
@@ -72,16 +101,26 @@ class MediaItem{
 }
 
 class Movie: MediaItem {
+    var director: String
+    init(name: String, director: String){
+        self.director = director
+        super.init(name: name)
+    }
 }
 
 class Song: MediaItem {
+    var artist: String
+    init(name: String, artist: String){
+        self.artist = artist
+        super.init(name: name)
+    }
 }
 
 /*:
  - Callout(Challenge - Part 2):
  Now take the array below of MediaItems and create a for loop on the array that prints out what type of media item it is and print out their properties.
  */
-/*
+
 let library = [
     Movie(name: "Casablanca", director: "Michael Curtiz"),
     Song(name: "Blue Suede Shoes", artist: "Elvis Presley"),
@@ -89,6 +128,16 @@ let library = [
     Song(name: "The One And Only", artist: "Chesney Hawkes"),
     Song(name: "Never Gonna Give You Up", artist: "Rick Astley")
 ]
- */
 
+func printTypeOfMedia(){
+    for mediaType in library {
+        if let movie = mediaType as? Movie {
+            print("Movie", movie.name, movie.director)
+        } else if let song = mediaType as? Song {
+            print("Song", song.name, song.artist)
+        }
+    }
+}
+
+printTypeOfMedia()
 //: [Next](@next)
