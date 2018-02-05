@@ -1,5 +1,4 @@
 //: [Previous](@previous)
-
 /*:
  ## Generics
  Generics allow us to write flexible and reusable code that can take in any variable type. You have been using collections that use generic types. Both arrays and dictionaries use a generic type. You can define any variable type for those collections to store.

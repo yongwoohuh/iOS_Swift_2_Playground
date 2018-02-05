@@ -1,7 +1,5 @@
 //: [Previous](@previous)
-
 import UIKit
-
 /*:
  ## Type Casting
  Type casting is a way to check the type of a varible. We can also down cast a variable to a different subclass of its type. For example, we could downcast a `UIView` as a `UIButton` since the button is a subclass of `UIView`.

@@ -1,5 +1,5 @@
 //: [Previous](@previous)
-
+import Foundation
 /*:
  ## More Tuples
  We already know switch statements can evaluate some value and tries to match it up with a case provided.

@@ -1,5 +1,5 @@
 //: [Previous](@previous)
-
+import Foundation
 /*:
  - Callout(Stretch Goal):
 Earlier we learned about switch statements and tuples. So far we've evaluated the tuple based on a very simple comparison; we just compare if the values match. We can create more complicated matching patterns for our cases.

@@ -1,7 +1,5 @@
 //: [Previous](@previous)
-
 import Foundation
-
 /*:
  ## Do Try Catch
  We are going to learn about error handling which is how to handle a potential operation failure gracefully. When the operation does fail, it is useful to understand what caused the failure. In terms of user experience, it is a much better to have our application display proper errors or do an alternative action as oppose to crashing our app.
