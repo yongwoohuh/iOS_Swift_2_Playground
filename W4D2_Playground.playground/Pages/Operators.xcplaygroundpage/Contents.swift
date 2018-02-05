@@ -115,12 +115,12 @@ var stuffass = doCoolStuff√√√
  - Callout(Challenge):
  When we have percentage values, we tend to convert them into their decimal form before doing any arithmetic to them. Create an operator with the '%' that will be a convenient operator to convert Int values into a usable percentage value. ie: 10% = 0.1
  */
-postfix operator %%
-postfix func %% (number: Int) -> Float {
-    return number %% 10
+postfix operator %
+postfix func % (number: Int) -> Double {
+    return Double(number) / 100.0
 }
 var turnThisNumberForMe = 100
-var resultOfStuff = turnThisNumberForMe%%
+var resultOfStuff = turnThisNumberForMe%
 
 /*:
  - Callout(Challenge):

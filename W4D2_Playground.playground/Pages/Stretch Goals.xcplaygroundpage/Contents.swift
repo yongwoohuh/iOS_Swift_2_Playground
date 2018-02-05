@@ -65,7 +65,7 @@ let stringArray = [String]()
 //stringArray.functionOnlyForNumbers() // MISSING!
 
 //: Now it's your turn. Create an extension on the 'Queue' data structure you created earlier.
-//: For elements that conforms to the 'Numeric' protocol, create a function that adds all numbers together in the queue and print out its total.
+//: For elements that conform to the 'Numeric' protocol, create a function that adds all numbers together in the queue and print out its total.
 
 
 
