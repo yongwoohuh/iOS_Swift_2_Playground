@@ -7,25 +7,29 @@
  - Experiment:
  Declare a optional Double value and set it to nil.
  */
-
+var optionalDouble: Double? = nil
 
 /*:
  - Experiment:
  Assign a value your optional Double.
  */
-
+optionalDouble = 42.0
 
 /*:
  - Experiment:
  Force unwrap the optional value. Why do you have to be careful about force unwrapping?
  */
-
-
+let forceUnwrapedDouble = optionalDouble!
+print(forceUnwrapedDouble)
 /*:
  - Experiment:
  Use conditional unwrapping to verify if the optional has a value. Print the value if there is something, otherwise, print out to indicate there is no value present. Why is conditional unwrapping better than force unwrapping?
  */
-
+if let myDouble = optionalDouble {
+  print("\(myDouble)")
+} else {
+  print("Error")
+}
 
 /*:
  - Callout(Challenge):
@@ -33,7 +37,20 @@
  */
 var testData: [String?] = ["Heather", nil, "Mike", "John", nil, nil, "Bob"]
 
+func removeNil(target: [String?]) -> [String] {
+  var newArray = [String]()
+  
+  for item in target {
+    if item != nil {
+      newArray.append(item!)
+    }
+  }
+  
+  return newArray
+}
 
+var result = removeNil(target: testData)
+print(result)
 /*:
  - Callout(Challenge):
  We want to write a function that validates form data filled in by a user. Once we encounter the first field that is blank, we want to indicate to the user that the field is blank.
@@ -41,9 +58,9 @@ var testData: [String?] = ["Heather", nil, "Mike", "John", nil, nil, "Bob"]
  Below is some test data you can use to test your function.
  */
 // Should pass all checks and print all information
-let username: String? = "user1"
-let password: String? = "password123"
-let email: String? = "user1@lighthouselabs.ca"
+//let username: String? = "user1"
+//let password: String? = "password123"
+//let email: String? = "user1@lighthouselabs.ca"
 
 // Should stop at password check and indicate password field is empty
 //let username: String? = "user1"
@@ -51,11 +68,33 @@ let email: String? = "user1@lighthouselabs.ca"
 //let email: String? = "user1@lighthouselabs.ca"
 
 // Should stop at username check and indicate username field is empty
-//let username: String? = nil
-//let password: String? = nil
-//let email: String? = "user1@lighthouselabs.ca"
+let username: String? = nil
+let password: String? = nil
+let email: String? = "user1@lighthouselabs.ca"
 
+func checkUserInput(username: String?, password: String?, email: String?) {
+  if username == nil {
+    print("username field can not be empty")
+    return
+  }
+  
+  if password == nil {
+    print("username field can not be empty")
+    return
+  }
+  
+  if email == nil {
+    print("email field can not be emtpy")
+    return
+  }
+  if username != nil && password != nil && email != nil {
+    print("username is \(username!)")
+    print("password is \(password!)")
+    print("email is \(email!)")
+  }
+}
 
+checkUserInput(username: username, password: password, email: email)
 
 /*:
  ## Guard Let
